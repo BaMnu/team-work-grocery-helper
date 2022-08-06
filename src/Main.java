@@ -56,6 +56,12 @@ public class Main {
             writeProd[num] += prodCount;
             costAll[num] = productCost[num] * writeProd[num];
 
+            if (prodCount == 0 || (costAll[num] + prodCount) < 0) {
+                System.out.println("Обнуление корзаны по товару: " + product[num]);
+                costAll[num] = 0;
+                writeProd[num] = 0;
+            }
+
         }
 
         System.out.println("\nВаш чек! Купленные продукты: ");
