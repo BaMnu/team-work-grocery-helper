@@ -68,7 +68,7 @@ public class Main {
 
 
       if (productSale[num].equals(product[num]) & writeProd[num] >= 3) {
-        costAll[num] = (writeProd[num] - (writeProd[num] / 3)) * productCost[num];
+        costAll[num] = (writeProd[num] - (writeProd[num] / 3)) * productCost[num];  // Акция
 
     }
 
