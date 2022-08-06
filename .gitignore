@@ -2,5 +2,9 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+.idea*
 .idea/*
 Team_wort_Olga.iml
+.idea/workspace.xml
+.xml
+.iml
