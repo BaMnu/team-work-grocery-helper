@@ -8,6 +8,7 @@ public class Main {
     final int minNumOfLot = 1;
 
     String[] product = {"Молоко", "Соль", "Хлеб", "Крупа", "Мясо"};
+    String[] productSale = {"Нет акции", "Соль", "Нет акции", "Крупа", "Нет акции"};
     int[] productCost = {80, 30, 35, 70, 150};
     int[] costAll = new int[productCost.length];
     int[] writeProd = new int[product.length];
@@ -19,9 +20,19 @@ public class Main {
       System.out.println((i + 1) + ": " + product[i] + ": " + productCost[i] + " руб/кг(шт).");
     }
 
+    System.out.print("по Акции (3 кг/шт по цене 2 кг/шт):  ");
+    for (String s : productSale) {
+      if ("Нет акции".equals(s)) {
+        continue;
+      }
+
+      System.out.print("[" + s + "] ");
+    }
+
     int num;
     int sumCost = 0;
     int prodCount;
+    String text;
 
     while (true) {
       System.out.print("\nВведите позицию покупаемого товара [1-5]: > ");
@@ -56,12 +67,20 @@ public class Main {
       writeProd[num] += prodCount;
       costAll[num] = productCost[num] * writeProd[num];
 
+      if (productSale[num].equals(product[num]) & writeProd[num] >= 3) {
+        costAll[num] = (writeProd[num] - (writeProd[num] / 3)) * productCost[num];
+      }
     }
 
     System.out.println("\nВаш чек! Купленные продукты: ");
     for (int i = 0; i < product.length; i++) {
       if (writeProd[i] != 0) {
-        System.out.println("'" + product[i] + "'" + " общая стоимость за " + writeProd[i] +
+        if (product[i].equals(productSale[i]) && writeProd[i] >= 3) {
+          text = "Товар по Акции: ";
+        } else {
+          text = "";
+        }
+        System.out.println(text + "'" + product[i] + "'" + " общая стоимость за " + writeProd[i] +
             " кг/шт. " + costAll[i] + " руб. ["
             + productCost[i] + " руб./шт.]");
       }
