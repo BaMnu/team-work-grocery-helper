@@ -25,14 +25,13 @@ public class Main {
       if ("Нет акции".equals(s)) {
         continue;
       }
-      System.out.print("[" + s +"]");
+      System.out.print("[" + s + "]");
     }
 
     int num;
     int sumCost = 0;
     int prodCount;
-    String text = "";
-
+    String text;
 
     while (true) {
       System.out.print("\nВведите позицию покупаемого товара [1-5]: > ");
@@ -67,21 +66,21 @@ public class Main {
       writeProd[num] += prodCount;
       costAll[num] = productCost[num] * writeProd[num];
 
-
       if (productSale[num].equals(product[num]) & writeProd[num] >= 3) {
         costAll[num] = (writeProd[num] - (writeProd[num] / 3)) * productCost[num];  // Акция
-
       }
 
     }
-
     System.out.println("\nВаш чек! Купленные продукты: ");
     for (int i = 0; i < product.length; i++) {
       if (writeProd[i] != 0) {
 
-        if (product[i].equals(productSale[i]) & writeProd[i] >= 3) { // Вывод обозначения Акционного товара
+        if (product[i].equals(productSale[i])
+            & writeProd[i] >= 3) { // Вывод обозначения Акционного товара
           text = "Товар по Акции: ";
-        } else text = "";
+        } else {
+          text = "";
+        }
         System.out.println(text + "'" + product[i] + "'" + " общая стоимость за " + writeProd[i] +
             " кг/шт. " + costAll[i] + " руб. ["
             + productCost[i] + " руб./шт.]");
