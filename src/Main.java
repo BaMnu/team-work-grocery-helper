@@ -19,12 +19,13 @@ public class Main {
     for (int i = 0; i < product.length; i++) {
       System.out.println((i + 1) + ": " + product[i] + ": " + productCost[i] + " руб/кг(шт).");
 
-      }
+    }
     System.out.print("по Акции (3 кг/шт по цене 2 кг/шт):  ");
     for (String s : productSale) {
       if ("Нет акции".equals(s)) {
         continue;
       }
+      System.out.print("[" + s +"]");
     }
 
     int num;
@@ -70,7 +71,7 @@ public class Main {
       if (productSale[num].equals(product[num]) & writeProd[num] >= 3) {
         costAll[num] = (writeProd[num] - (writeProd[num] / 3)) * productCost[num];  // Акция
 
-    }
+      }
 
     }
 
