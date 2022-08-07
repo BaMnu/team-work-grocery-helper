@@ -68,7 +68,7 @@ public class Main {
             costAll[num] = productCost[num] * writeProd[num];
 
             if (prodCount == 0 || (costAll[num] + prodCount) < 0) {
-                System.out.println("Обнуление корзаны по товару: " + product[num]);
+                System.out.println("Обнуление корзины по товару: " + product[num]);
                 costAll[num] = 0;
                 writeProd[num] = 0;
             }
