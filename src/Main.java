@@ -73,7 +73,7 @@ public class Main {
             }
 
             if (productSale[num].equals(product[num]) & writeProd[num] >= 3) {
-                costAll[num] = (writeProd[num] - (writeProd[num] / 3)) * productCost[num];  // Акция
+                costAll[num] = (writeProd[num] - (writeProd[num] / 3)) * productCost[num];
             }
 
         }
@@ -83,7 +83,7 @@ public class Main {
             if (writeProd[i] != 0) {
 
                 if (product[i].equals(productSale[i])
-                        & writeProd[i] >= 3) { // Вывод обозначения Акционного товара
+                        & writeProd[i] >= 3) {
                     text = "Товар по Акции: ";
                 } else {
                     text = "";
