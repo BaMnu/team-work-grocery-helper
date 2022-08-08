@@ -2,71 +2,78 @@ import java.util.Scanner;
 
 public class Main {
 
-  public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    String[] product = {"Молоко: ", "Соль: ", "Хлеб: ", "Сахар: ", "Напитки: ", "Рыба: "};
-    String[] productCost = {"80", "30", "35", "95", "70", "150"};
-    String[] productSale = {"Соль: ", "Сахар: ", "Крупа: ", null, null, null};
-    int[] costAll = new int[productCost.length];
+        final int minNumOfLot = 1;
 
-    System.out.println("____________________\n" + "В наличии продукты:\n" + "____________________\n");
-    for (int i = 0; i < product.length; i++) {
-      System.out.println((i + 1) + ": " + product[i] + " " + productCost[i] + " руб/кг(шт).");
+        String[] product = {"Молоко", "Соль", "Хлеб", "Крупа", "Мясо"};
+        int[] productCost = {80, 30, 35, 70, 150};
+        int[] costAll = new int[productCost.length];
+        int[] writeProd = new int[product.length];
+
+        System.out.println("____________________");
+        System.out.println("В наличии продукты:");
+
+        for (int i = 0; i < product.length; i++) {
+            System.out.println((i + 1) + ": " + product[i] + ": " + productCost[i] + " руб/кг(шт).");
+        }
+
+        int num;
+        int sumCost = 0;
+        int prodCount;
+
+        while (true) {
+            System.out.print("\nВведите позицию покупаемого товара [1-5]: > ");
+            String inputNum = scanner.nextLine();
+
+            if ("end".equals(inputNum)) {
+                break;
+            }
+
+            if (Integer.parseInt(inputNum) < minNumOfLot || Integer.parseInt(inputNum) > product.length) {
+                System.out.println(new FalsePositionException(inputNum));
+                continue;
+            }
+
+            System.out.print("Введите количество покупаемого: > ");
+
+            try {
+
+                String inputLot = scanner.nextLine();
+                if ("end".equals(inputLot)) {
+                    break;
+                }
+
+                prodCount = Integer.parseInt(inputLot);
+                num = Integer.parseInt(inputNum) - 1;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка! Нужно вводить только числа!");
+                continue;
+            }
+
+            writeProd[num] += prodCount;
+            costAll[num] = productCost[num] * writeProd[num];
+
+            if (prodCount == 0 || (costAll[num] + prodCount) < 0) {
+                System.out.println("Обнуление корзины по товару: " + product[num]);
+                costAll[num] = 0;
+                writeProd[num] = 0;
+            }
+        }
+
+        System.out.println("\nВаш чек! Купленные продукты: ");
+        for (int i = 0; i < product.length; i++) {
+            if (writeProd[i] != 0) {
+                System.out.println("'" + product[i] + "'" + " общая стоимость за " + writeProd[i] +
+                        " кг/шт. " + costAll[i] + " руб. ["
+                        + productCost[i] + " руб./шт.]");
+            }
+            sumCost += costAll[i];
+        }
+        System.out.println("______________________________________________________");
+        System.out.println("\nОбщая сумма покупки составляет: " + sumCost + " руб.");
+        scanner.close();
     }
-
-
-
-    int num = 0;
-    int price = 0;
-    int total = 0;
-
-    while (true) {
-      System.out.print("Введите позицию товара [1-6]: > ");
-      String inputNum = scanner.nextLine();
-      System.out.print("Введите количество покупаемого: > ");
-      String inputLot = null;
-
-      try {
-        inputLot = scanner.nextLine();
-      } catch (NumberFormatException e) {
-        System.out.println("Ошибка! Нужно вводить только числа!");
-        continue;
-      }
-
-      if ("end".equals(inputNum) || "end".equals(inputLot)) {
-        break;
-      } else if (Integer.parseInt(inputNum) < 1 || Integer.parseInt(inputNum) > product.length) {
-        throw new FalsePositionException(inputNum);
-      }
-
-      try {
-        num = Integer.parseInt(inputNum) - 1;
-        price = Integer.parseInt(productCost[num]);
-
-        total = costAll[num] + (Integer.parseInt(inputLot) * price);
-        costAll[num] = total;
-
-      } catch (NumberFormatException e) {
-        System.out.println("Ошибка! Нужно вводить только числа!");
-      }
-    }
-    scanner.close();
-    System.out.println("\nВаш чек! Купленные продукты:");
-
-        /*
-        Логику просчитывания ИТОГО продумай пожалуйста заново. Используй только те переменные, которые уже указаны.
-        НЕ вводить новых переменных и НЕ добавлять новых методов, из-за обилия доп. методов/ переменных очень сложно
-        понять код и легко запутаться (даже самому ;)). Сократила наименования, а то итак запутанно, так еще и
-        продуктов много
-         */
-
-    for (int temp : costAll) {
-            ??? = ??? + temp;
-    }
-
-    System.out.println("______________________________________________________");
-    System.out.println("Общая сумма покупки составляет: " + ??? + " руб.");
-
-  }
 }
