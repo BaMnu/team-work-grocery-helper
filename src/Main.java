@@ -73,6 +73,7 @@ public class Main {
     }
     System.out.println("\nВаш чек! Купленные продукты: ");
     for (int i = 0; i < product.length; i++) {
+
       if (writeProd[i] != 0) {
 
         if (product[i].equals(productSale[i])
